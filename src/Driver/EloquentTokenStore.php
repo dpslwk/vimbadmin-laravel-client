@@ -1,6 +1,6 @@
 <?php
 
-namespace LWK\ViMbAdmi\Driver;
+namespace LWK\ViMbAdmin\Driver;
 
 use LWK\ViMbAdmin\Contracts\TokenStore as TokenStoreContract;
 
