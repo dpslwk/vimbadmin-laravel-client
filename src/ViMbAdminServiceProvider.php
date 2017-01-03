@@ -13,7 +13,9 @@ class ViMbAdminServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        $this->publishes([
+            $this->getConfigPath() => config_path('vimbadmin.php'),
+        ], 'config');
     }
 
     /**
@@ -23,6 +25,31 @@ class ViMbAdminServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->mergeConfig();
+
+        $this->app->singleton(TokenStore::class, function ($app) {
+            $tokenStoreManager = new TokenStoreManager($app);
+
+            return $tokenStoreManager->driver();
+        });
+
+    }
+
+    /**
+     * Merge config
+     */
+    protected function mergeConfig()
+    {
+        $this->mergeConfigFrom(
+            $this->getConfigPath(), 'vimbadmin'
+        );
+    }
+
+    /**
+     * @return string
+     */
+    protected function getConfigPath()
+    {
+        return __DIR__ . '/../config/vimbadmin.php';
     }
 }

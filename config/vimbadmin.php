@@ -31,7 +31,7 @@ return [
     | Supported: "json", "eloquent", "doctorine"
     |
     */
-    'provider' => env('VIMBADMIN_PROVIDER', 'json'),
+    'driver' => env('VIMBADMIN_DRIVER', 'json'),
 
     /*
     |--------------------------------------------------------------------------
@@ -50,7 +50,7 @@ return [
             'model' => env('VIMBADMIN_MODEL'),
         ],
         'docrtine' => [
-            'model' => env('VIMBADMIN_MODEL'),
+            'entity' => env('VIMBADMIN_ENITITY'),
         ],
 
 
