@@ -3,6 +3,9 @@
 namespace LWK\ViMbAdmin;
 
 use Illuminate\Support\Manager;
+use LWK\ViMbAdmin\Driver\JsonTokenStore;
+use LWK\ViMbAdmin\Driver\EloquentTokenStore;
+use LWK\ViMbAdmin\Driver\DoctorineTokenStore;
 
 class TokenStoreManager extends Manager
 {

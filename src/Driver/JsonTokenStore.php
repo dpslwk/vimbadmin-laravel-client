@@ -68,11 +68,11 @@ class JsonTokenStore implements TokenStoreContract
      * Create a new Token with the give values.
      * @param  string   $key
      * @param  string   $token
-     * @param  DataTime $expires
+     * @param  DateTime $expires
      * @param  string $type
      * @return LWK\ViMbAdmin\JsonToken
      */
-    public function create(string $key, string $token, \DataTime $expires, string $type)
+    public function create(string $key, string $token, \DateTime $expires, string $type)
     {
         $_token = JsonToken::createToken($key, $token, $expires, $type);
 

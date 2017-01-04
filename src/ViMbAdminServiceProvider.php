@@ -2,7 +2,9 @@
 
 namespace LWK\ViMbAdmin;
 
+use LWK\ViMbAdmin\TokenStoreManager;
 use Illuminate\Support\ServiceProvider;
+use LWK\ViMbAdmin\Contracts\TokenStore;
 
 class ViMbAdminServiceProvider extends ServiceProvider
 {
@@ -32,7 +34,6 @@ class ViMbAdminServiceProvider extends ServiceProvider
 
             return $tokenStoreManager->driver();
         });
-
     }
 
     /**
