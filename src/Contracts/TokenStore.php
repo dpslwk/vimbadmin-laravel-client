@@ -3,6 +3,7 @@
 namespace LWK\ViMbAdmin\Contracts;
 
 use LWK\ViMbAdmin\Contracts\ViMbAdminToken;
+use Sainsburys\Guzzle\Oauth2\GrantType\GrantTypeInterface;
 
 interface TokenStore
 {
@@ -35,5 +36,12 @@ interface TokenStore
      * @param  LWK\ViMbAdmin\Contracts\ViMbAdminToken $token
      */
     public function forget(ViMbAdminToken $token);
+
+    /**
+     * Litle helper to turn GrantType into a key.
+     * @param  GrantTypeInterface $grantType
+     * @return string
+     */
+    public function serializeKey(GrantTypeInterface $grantType);
 
 }

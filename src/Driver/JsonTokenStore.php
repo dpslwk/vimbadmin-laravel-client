@@ -2,6 +2,7 @@
 
 namespace LWK\ViMbAdmin\Driver;
 
+use LWK\ViMbAdmin\Traits\SerializeKey;
 use LWK\ViMbAdmin\Model\JsonToken;
 use Illuminate\Support\Facades\Storage;
 use LWK\ViMbAdmin\Contracts\ViMbAdminToken;
@@ -9,6 +10,7 @@ use LWK\ViMbAdmin\Contracts\TokenStore as TokenStoreContract;
 
 class JsonTokenStore implements TokenStoreContract
 {
+    use SerializeKey;
     /**
      * In memory token store
      * @var Array
