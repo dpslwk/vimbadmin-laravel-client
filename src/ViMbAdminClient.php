@@ -15,17 +15,55 @@ use LWK\ViMbAdmin\Serializer\Normalizer\ViMbAdminNormalizer;
 
 class ViMbAdminClient
 {
+    /**
+     * @var TokenStore
+     */
     protected $tokenStore;
+
+    /**
+     * @var string
+     */
     protected $apiUrl;
+
+    /**
+     * @var string
+     */
     protected $clientId;
+
+    /**
+     * @var string
+     */
     protected $clientSecret;
+
+    /**
+     * @var GuzzleHttp\Client
+     */
     protected $client;
+
+    /**
+     * @var ViMbAdminNormalizer
+     */
     protected $normalizer;
+
+    /**
+     * @var Serializer
+     */
     protected $serializer;
 
-    function __construct(TokenStore $tokenStore, \Illuminate\Config\Repository $config, ViMbAdminNormalizer$normalizer)
+    /**
+     * ViMbAdminClient constructor
+     *
+     * @param TokenStore                    $tokenStore
+     * @param \Illuminate\Config\Repository $config
+     * @param ViMbAdminNormalizer           $normalizer
+     */
+    public function __construct(
+        TokenStore $tokenStore,
+        \Illuminate\Config\Repository $config,
+        ViMbAdminNormalizer $normalizer)
     {
         $this->tokenStore = $tokenStore;
+        // TODO: strip traling / from url
         $this->apiUrl = $config->get('vimbadmin.api_url');
         $this->clientId = $config->get('vimbadmin.client_id');
         $this->clientSecret = $config->get('vimbadmin.client_secret');
@@ -40,7 +78,19 @@ class ViMbAdminClient
         $this->setupClient($this->apiUrl, $this->clientId, $this->clientSecret);
     }
 
-    public function setupClient($apiUrl, $clientId, $clientSecret, $tokenUri = '/oauth/token')
+    /**
+     * GuzzleHttp Client setup helper, broken out after constructor is need to use none config crdientials
+     * @param  string $apiUrl
+     * @param  string $clientId
+     * @param  string $clientSecret
+     * @param  string $tokenUri
+     * @return self
+     */
+    public function setupClient(
+        string $apiUrl,
+        string $clientId,
+        string $clientSecret,
+        string $tokenUri = '/oauth/token')
     {
         $handlerStack = HandlerStack::create();
         $client = new Client(
@@ -79,16 +129,40 @@ class ViMbAdminClient
         $handlerStack->push($middleware->onFailure(5));
 
         $this->client = $client;
+
+        return $this;
     }
 
-    public function get($url)
+    /**
+     * internal get helper
+     * @param  string $uri [description]
+     * @return [type]      [description]
+     */
+    private function get($uri)
     {
-        // return json_decode($this->client->get($url)->getBody());
-        return $this->serializer->deserialize($this->client->get($url)->getBody(), Mailbox::class, 'json');
+        $url = $this->apiUrl.'/'.$uri;
+        return $this->serializer->deserialize($this->client->get($url)->getBody(), null, 'json');
     }
 
 // createAlias($alias)
-// findAliasesForDomain($domainName, $query)
+
+    /**
+     * findAliasesForDomain
+     * @param  string $domainName
+     * @param  string|null $query      an email address to look for
+     * @return array|Alias
+     */
+    public function findAliasesForDomain(string $domainName, $query = null)
+    {
+        if (is_null($query)) {
+            $uri = $domainName.'/aliases/';
+        } else {
+            $uri = $domainName.'/aliases/q='.$query;
+        }
+
+        return get($uri);
+    }
+
 // findDomains($query, $includes)
 // findMailboxesForDoman($domainName, $query)
 // getAliasForDomain($domainName, $aliasId)
