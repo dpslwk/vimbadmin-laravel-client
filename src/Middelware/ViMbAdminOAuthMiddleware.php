@@ -50,7 +50,8 @@ class ViMbAdminOAuthMiddleware extends OAuthMiddleware
     /**
      * Save new access token to out tokenStore.
      */
-    private function saveAccessToken() {
+    private function saveAccessToken()
+    {
         $key = $this->tokenStore->serializeKey($this->grantType);
         $token = $this->tokenStore->create(
             $key,

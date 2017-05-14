@@ -16,7 +16,7 @@ class DoctrineToken implements ViMbAdminTokenContract
      * @param  DataTime $expires
      * @return LWK\ViMbAdmin\Contracts\ViMbAdminToken
      */
-    static public function createToken($key, $token, $expires, $type)
+    public static function createToken($key, $token, $expires, $type)
     {
         $_token = new static();
         $_token->key = $key;
@@ -25,5 +25,4 @@ class DoctrineToken implements ViMbAdminTokenContract
         $_token->type = $type;
         return $_token;
     }
-
 }

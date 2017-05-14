@@ -43,5 +43,4 @@ interface TokenStore
      * @return string
      */
     public function serializeKey(GrantTypeInterface $grantType);
-
 }

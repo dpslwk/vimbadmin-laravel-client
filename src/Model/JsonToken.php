@@ -24,7 +24,7 @@ class JsonToken implements ViMbAdminTokenContract, \JsonSerializable
      * @param  DataTime $expires
      * @return LWK\ViMbAdmin\Contracts\ViMbAdminToken
      */
-    static public function createToken($key, $token, $expires, $type)
+    public static function createToken($key, $token, $expires, $type)
     {
         $_token = new static();
         $_token->key = $key;
@@ -34,7 +34,8 @@ class JsonToken implements ViMbAdminTokenContract, \JsonSerializable
         return $_token;
     }
 
-    public function jsonSerialize() {
+    public function jsonSerialize()
+    {
         return [
             'id' => $this->id,
             'key' => $this->key,
@@ -43,5 +44,4 @@ class JsonToken implements ViMbAdminTokenContract, \JsonSerializable
             'type' => $this->type
         ];
     }
-
 }

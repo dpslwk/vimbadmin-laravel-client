@@ -31,7 +31,7 @@ class EloquentToken extends Model implements ViMbAdminTokenContract
      * @param  DataTime $expires
      * @return LWK\ViMbAdmin\Contracts\ViMbAdminToken
      */
-    static public function createToken($key, $token, $expires, $type)
+    public static function createToken($key, $token, $expires, $type)
     {
         $data = [
             'key' => $key,
