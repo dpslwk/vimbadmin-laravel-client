@@ -28,7 +28,7 @@ return [
     | This option controles which drive is used to store and retrive oAuth
     | tokens.
     |
-    | Supported: "json", "eloquent", "doctorine"
+    | Supported: "json", "eloquent", "doctrine"
     |
     */
     'driver' => env('VIMBADMIN_DRIVER', 'json'),
@@ -49,7 +49,7 @@ return [
         'eloquent' => [
             'model' => env('VIMBADMIN_MODEL'),
         ],
-        'docrtine' => [
+        'doctrine' => [
             'entity' => env('VIMBADMIN_ENITITY'),
         ],
 

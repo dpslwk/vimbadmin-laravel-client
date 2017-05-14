@@ -5,7 +5,7 @@ namespace LWK\ViMbAdmin;
 use Illuminate\Support\Manager;
 use LWK\ViMbAdmin\Driver\JsonTokenStore;
 use LWK\ViMbAdmin\Driver\EloquentTokenStore;
-use LWK\ViMbAdmin\Driver\DoctorineTokenStore;
+use LWK\ViMbAdmin\Driver\DoctrineTokenStore;
 
 class TokenStoreManager extends Manager
 {
@@ -30,13 +30,13 @@ class TokenStoreManager extends Manager
     }
 
     /**
-     * Create an instance of the Doctorine driver.
+     * Create an instance of the Doctrine driver.
      *
-     * @return DoctorineTokenStore
+     * @return DoctrineTokenStore
      */
-    protected function createDoctorineDriver()
+    protected function createDoctrineDriver()
     {
-        return new DoctorineTokenStore($this->app);
+        return new DoctrineTokenStore($this->app);
     }
 
     /**
