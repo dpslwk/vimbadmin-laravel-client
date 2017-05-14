@@ -51,7 +51,7 @@ class ViMbAdminClient
     protected $serializer;
 
     /**
-     * ViMbAdminClient constructor
+     * ViMbAdminClient constructor.
      *
      * @param TokenStore                    $tokenStore
      * @param \Illuminate\Config\Repository $config
@@ -79,7 +79,7 @@ class ViMbAdminClient
     }
 
     /**
-     * GuzzleHttp Client setup helper, broken out after constructor is need to use none config crdientials
+     * GuzzleHttp Client setup helper, broken out after constructor is need to use none config crdientials.
      * @param  string $apiUrl
      * @param  string $clientId
      * @param  string $clientSecret
@@ -134,7 +134,7 @@ class ViMbAdminClient
     }
 
     /**
-     * internal get helper
+     * internal get helper.
      * @param  string $uri [description]
      * @return [type]      [description]
      */
@@ -147,7 +147,7 @@ class ViMbAdminClient
 // createAlias($alias)
 
     /**
-     * findAliasesForDomain
+     * findAliasesForDomain.
      * @param  string $domainName
      * @param  string|null $query      an email address to look for
      * @return array|Alias
@@ -157,13 +157,38 @@ class ViMbAdminClient
         if (is_null($query)) {
             $uri = $domainName.'/aliases/';
         } else {
-            $uri = $domainName.'/aliases/q='.$query;
+            $uri = $domainName.'/aliases/?q='.$query;
         }
 
-        return get($uri);
+        return $this->get($uri);
     }
 
-// findDomains($query, $includes)
+    /**
+     * findDomains.
+     * @param  string|null       $query      a domain address to look for
+     * @param  array|string|null $includes   string or array of includes e.g. ['mailboxes', 'aliases']
+     * @return array|Alias
+     */
+    public function findDomains($query = null, $includes = null)
+    {
+        $uri = '/domains/?';
+        if (! is_null($query)) {
+            $uri .= 'q=' . $query;
+        }
+        if (! is_null($query) && ! is_null($includes)) {
+            $uri .= '&'; 
+        }
+        if (! is_null($includes)) {
+            $uri .= 'includes=';
+            if (is_string($includes)) {
+                $uri .= $includes;
+            } else {
+                $uri .= implode(',', $include);
+            }
+        }
+
+        return $this->get($uri);
+    }
 // findMailboxesForDoman($domainName, $query)
 // getAliasForDomain($domainName, $aliasId)
 // getDomain($domainId)
