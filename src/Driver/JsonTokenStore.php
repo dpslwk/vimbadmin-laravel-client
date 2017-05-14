@@ -11,6 +11,7 @@ use LWK\ViMbAdmin\Contracts\TokenStore as TokenStoreContract;
 class JsonTokenStore implements TokenStoreContract
 {
     use SerializeKey;
+    
     /**
      * In memory token store
      * @var Array
