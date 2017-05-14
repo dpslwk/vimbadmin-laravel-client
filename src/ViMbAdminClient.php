@@ -176,7 +176,7 @@ class ViMbAdminClient
             $uri .= 'q=' . $query;
         }
         if (! is_null($query) && ! is_null($includes)) {
-            $uri .= '&'; 
+            $uri .= '&';
         }
         if (! is_null($includes)) {
             $uri .= 'includes=';
@@ -196,7 +196,4 @@ class ViMbAdminClient
 // requestToken()
 // updateAlias($alias)
 // updateMailbox($mailbox)
-
-
-
 }

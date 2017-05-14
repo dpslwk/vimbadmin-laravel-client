@@ -32,7 +32,6 @@ class ViMbAdminNormalizer implements NormalizerInterface, DenormalizerInterface
     {
         $this->inflector = $inflector;
         $this->propertyAccessor = $propertyAccessor ?: PropertyAccess::createPropertyAccessor();
-
     }
 
     /**
@@ -46,7 +45,6 @@ class ViMbAdminNormalizer implements NormalizerInterface, DenormalizerInterface
      */
     public function normalize($object, $format = null, array $context = array())
     {
-
     }
 
     /**
@@ -59,7 +57,6 @@ class ViMbAdminNormalizer implements NormalizerInterface, DenormalizerInterface
      */
     public function supportsNormalization($data, $format = null)
     {
-
     }
 
     /**
@@ -78,7 +75,7 @@ class ViMbAdminNormalizer implements NormalizerInterface, DenormalizerInterface
         // default to an array object
         $object = [];
 
-        if ( ! isset($context['first_pass'])) {
+        if (! isset($context['first_pass'])) {
             $context['first_pass'] = true;
             // do we have an 'included' key?
             // if so recursive each include and add to context so they can be added with later relationships?
@@ -141,7 +138,7 @@ class ViMbAdminNormalizer implements NormalizerInterface, DenormalizerInterface
                     break;
                 case 'links':
                     // create a new Link object and add it to the $object if its not an array object
-                    if ( ! $object) {
+                    if (! $object) {
                         continue;
                     }
                     $link = new Link();
@@ -154,7 +151,7 @@ class ViMbAdminNormalizer implements NormalizerInterface, DenormalizerInterface
                     }
 
                     try {
-                         $this->propertyAccessor->setValue($object, $attribute, $link);
+                        $this->propertyAccessor->setValue($object, $attribute, $link);
                     } catch (NoSuchPropertyException $exception) {
                         // Properties not found are ignored
                     }
@@ -174,7 +171,7 @@ class ViMbAdminNormalizer implements NormalizerInterface, DenormalizerInterface
                         } else {
                             $relationships = $relations['data'];
                         }
-                        if ( ! $relationships) {
+                        if (! $relationships) {
                             continue;
                         }
 
@@ -247,6 +244,4 @@ class ViMbAdminNormalizer implements NormalizerInterface, DenormalizerInterface
     {
         return is_array($data);
     }
-
-
 }
