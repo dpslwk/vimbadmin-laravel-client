@@ -183,10 +183,10 @@ class ViMbAdminNormalizer implements NormalizerInterface, DenormalizerInterface
                             $relationObject->setType($relation['type']);
 
                             switch ($type) {
-                                case 'domains':
+                                case 'domain':
                                     $object->setRelation($relationObject);
-                                    if (isset($context[$type])) {
-                                        $object->setDomain($context[$type][$relation['id']]);
+                                    if (isset($context['domains'])) {
+                                        $object->setDomain($context['domains'][$relation['id']]);
                                     }
                                     break;
                                 case 'mailboxes':

@@ -135,13 +135,14 @@ class ViMbAdminClient
 
     /**
      * internal get helper.
-     * @param  string $uri [description]
-     * @return [type]      [description]
+     * @param  string $uri
+     * @return mixed
      */
-    private function get($uri)
+    private function get(string $uri)
     {
         $url = $this->apiUrl.'/'.$uri;
-        return $this->serializer->deserialize($this->client->get($url)->getBody(), null, 'json');
+        $response = $this->client->get($url)->getBody();
+        return $this->serializer->deserialize($response, null, 'json');
     }
 
 // createAlias($alias)
@@ -150,7 +151,7 @@ class ViMbAdminClient
      * findAliasesForDomain.
      * @param  string $domainName
      * @param  string|null $query      an email address to look for
-     * @return array|Alias
+     * @return Alias[]
      */
     public function findAliasesForDomain(string $domainName, $query = null)
     {
@@ -167,7 +168,7 @@ class ViMbAdminClient
      * findDomains.
      * @param  string|null       $query      a domain address to look for
      * @param  array|string|null $includes   string or array of includes e.g. ['mailboxes', 'aliases']
-     * @return array|Alias
+     * @return Domain[]
      */
     public function findDomains($query = null, $includes = null)
     {
@@ -179,21 +180,81 @@ class ViMbAdminClient
             $uri .= '&';
         }
         if (! is_null($includes)) {
-            $uri .= 'includes=';
+            $uri .= 'include=';
             if (is_string($includes)) {
                 $uri .= $includes;
             } else {
-                $uri .= implode(',', $include);
+                $uri .= implode(",", $includes);
             }
         }
 
         return $this->get($uri);
     }
-// findMailboxesForDoman($domainName, $query)
-// getAliasForDomain($domainName, $aliasId)
-// getDomain($domainId)
-// getMailboxForDomain($domainName, $mailboxId)
-// requestToken()
+
+    /**
+     * findMailboxesForDomain.
+     * @param  string $domainName
+     * @param  string|null $query      an email address to look for
+     * @return Mailbox[]
+     */
+    public function findMailboxesForDomain(string $domainName, $query = null)
+    {
+        if (is_null($query)) {
+            $uri = $domainName.'/mailboxes/';
+        } else {
+            $uri = $domainName.'/mailboxes/?q='.$query;
+        }
+
+        return $this->get($uri);
+    }
+
+    /**
+     * getAliasForDomain.
+     * @param  string $domainName
+     * @param  int    $aliasId
+     * @return Alias
+     */
+    public function getAliasForDomain(string $domainName, int $aliasId)
+    {
+        $uri = $domainName.'/aliases/'.$aliasId ;
+
+        return $this->get($uri);
+    }
+ 
+    /**
+     * getDomain.
+     * @param  int    $domainId
+     * @param  array|string|null $includes   string or array of includes e.g. ['mailboxes', 'aliases']
+     * @return Domain
+     */
+    public function getDomain(int $domainId, $includes = null)
+    {
+        $uri = '/domains/'.$domainId ;
+        if (! is_null($includes)) {
+            $uri .= '?include=';
+            if (is_string($includes)) {
+                $uri .= $includes;
+            } else {
+                $uri .= implode(",", $includes);
+            }
+        }
+        
+        return $this->get($uri);
+    }
+
+    /**
+     * getMailboxForDomain.
+     * @param  string $domainName
+     * @param  int    $mailboxId
+     * @return Mailbox
+     */
+    public function getMailboxForDomain(string $domainName, int $mailboxId)
+    {
+        $uri = $domainName.'/mailboxes/'.$mailboxId ;
+
+        return $this->get($uri);
+    }
+
 // updateAlias($alias)
 // updateMailbox($mailbox)
 }
