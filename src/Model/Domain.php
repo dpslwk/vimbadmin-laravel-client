@@ -261,7 +261,13 @@ class Domain implements \JsonSerializable
     public function jsonSerialize()
     {
         return [
-
+            'data' => [
+                'type' => $this->type,
+                'id'      => $this->id,
+                'attributes' => [
+                    'domain' => $this->domain,
+                ],
+            ],
         ];
     }
 }

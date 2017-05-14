@@ -138,6 +138,15 @@ class Alias implements \JsonSerializable
         return $this;
     }
 
+    public function addGoto(string $address)
+    {
+        if (! in_array($address, $this->goto)) {
+            $this->goto[] = $address;
+        }
+
+        return $this;
+    }
+    
     /**
      * Gets the value of links.
      *
@@ -217,7 +226,14 @@ class Alias implements \JsonSerializable
     public function jsonSerialize()
     {
         return [
-
+            'data' => [
+                'type' => $this->type,
+                'id'      => $this->id,
+                'attributes' => [
+                    'address' => $this->address,
+                    'goto'    => $this->goto,
+                ],
+            ],
         ];
     }
 }

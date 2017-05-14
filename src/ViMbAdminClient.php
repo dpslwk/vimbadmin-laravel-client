@@ -4,6 +4,8 @@ namespace LWK\ViMbAdmin;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\HandlerStack;
+use GuzzleHttp\Psr7\Request;
+use LWK\ViMbAdmin\Model\Alias;
 use LWK\ViMbAdmin\Model\Mailbox;
 use LWK\ViMbAdmin\Contracts\TokenStore;
 use Sainsburys\Guzzle\Oauth2\AccessToken;
@@ -99,8 +101,10 @@ class ViMbAdminClient
                 'base_uri' => $apiUrl,
                 'auth' => 'oauth2',
                 'headers' => [
-                    'Accept'     => 'application/json',
+                    'Accept'       => 'application/json',
+                    'Content-Type' => 'application/json',
                 ],
+                'exceptions' => false,
             ]
         );
 
@@ -145,6 +149,32 @@ class ViMbAdminClient
         return $this->serializer->deserialize($response, null, 'json');
     }
 
+    /**
+     * internal post helper.
+     * @param  string $uri
+     * @param  string $json
+     * @return mixed
+     */
+    private function post(string $uri, $json)
+    {
+        $url = $this->apiUrl.'/'.$uri;
+        $response = $this->client->post($url, ['body' => $json])->getBody();
+        return $this->serializer->deserialize($response, null, 'json');
+    }
+
+    /**
+     * internal patch helper.
+     * @param  string $uri
+     * @param  string $json
+     * @return mixed
+     */
+    private function patch(string $uri, $json)
+    {
+        $url = $this->apiUrl.'/'.$uri;
+        $response = $this->client->patch($url, ['body' => $json])->getBody();
+        return $this->serializer->deserialize($response, null, 'json');
+    }
+
 // createAlias($alias)
 
     /**
@@ -172,7 +202,7 @@ class ViMbAdminClient
      */
     public function findDomains($query = null, $includes = null)
     {
-        $uri = '/domains/?';
+        $uri = 'domains/?';
         if (! is_null($query)) {
             $uri .= 'q=' . $query;
         }
@@ -229,7 +259,7 @@ class ViMbAdminClient
      */
     public function getDomain(int $domainId, $includes = null)
     {
-        $uri = '/domains/'.$domainId ;
+        $uri = 'domains/'.$domainId ;
         if (! is_null($includes)) {
             $uri .= '?include=';
             if (is_string($includes)) {
@@ -238,7 +268,7 @@ class ViMbAdminClient
                 $uri .= implode(",", $includes);
             }
         }
-        
+
         return $this->get($uri);
     }
 
@@ -255,6 +285,25 @@ class ViMbAdminClient
         return $this->get($uri);
     }
 
-// updateAlias($alias)
-// updateMailbox($mailbox)
+    /**
+     * updateAlias.
+     * @param  Alias $alias
+     * @return Link
+     */
+    public function updateAlias(Alias $alias)
+    {
+        $uri = $alias->getDomain()->getDomain().'/aliases/'.$alias->getId();
+        return $this->patch($uri, json_encode($alias));
+    }
+
+    /**
+     * updateMailbox.
+     * @param  Mailbox $mailbox
+     * @return Link
+     */
+    public function updateMailbox(LWK\ViMbAdmin\Model\Mailbox $mailbox)
+    {
+        $uri = $mailboxes->getDomain()->getDomain().'/mailboxes/'.$mailbox->getId();
+        return $this->patch($uri, json_encode($mailbox));
+    }
 }

@@ -217,7 +217,14 @@ class Mailbox implements \JsonSerializable
     public function jsonSerialize()
     {
         return [
-
+            'data' => [
+                'type' => $this->type,
+                'id'      => $this->id,
+                'attributes' => [
+                    'username' => $this->username,
+                    'name'     => $this->name,
+                ],
+            ],
         ];
     }
 }

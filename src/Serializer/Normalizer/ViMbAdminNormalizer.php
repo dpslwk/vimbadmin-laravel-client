@@ -79,6 +79,18 @@ class ViMbAdminNormalizer implements NormalizerInterface, DenormalizerInterface
 
         if (! isset($context['first_pass'])) {
             $context['first_pass'] = true;
+            if (count($normalizedData) == 1 && array_key_exists('links', $normalizedData)) {
+                // this must be link response to a post/patch request
+                $link = new Link();
+                foreach ($normalizedData['links'] as $key => $_value) {
+                    try {
+                        $this->propertyAccessor->setValue($link, $key, $_value);
+                    } catch (NoSuchPropertyException $exception) {
+                        // Properties not found are ignored
+                    }
+                }
+                return $link;
+            }
             // do we have an 'included' key?
             // if so recursive each include and add to context so they can be added with later relationships?
             //  set $context['processing_includes'] while doing this
@@ -215,7 +227,7 @@ class ViMbAdminNormalizer implements NormalizerInterface, DenormalizerInterface
                         $error = new Error();
                         foreach ($errorArray as $key => $_value) {
                             try {
-                                $this->propertyAccessor->setValue($error, $attribute, $_value);
+                                $this->propertyAccessor->setValue($error, $key, $_value);
                             } catch (NoSuchPropertyException $exception) {
                                 // Properties not found are ignored
                             }
