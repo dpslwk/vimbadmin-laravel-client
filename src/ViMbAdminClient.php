@@ -52,6 +52,11 @@ class ViMbAdminClient
      */
     protected $serializer;
 
+    /** 
+     * @var bool
+     */
+    protected $isInitialised;
+
     /**
      * ViMbAdminClient constructor.
      *
@@ -77,11 +82,21 @@ class ViMbAdminClient
             'json' => new JsonEncoder(),
         ));
 
-        $this->setupClient($this->apiUrl, $this->clientId, $this->clientSecret);
+        $this->isInitialised = false;
     }
 
     /**
-     * GuzzleHttp Client setup helper, broken out after constructor is need to use none config crdientials.
+     * Initialise the Guzzle client if needed.
+     */
+    public function initialiseClient()
+    {
+        if (! $this->isInitialised) {
+            $this->setupClient($this->apiUrl, $this->clientId, $this->clientSecret);
+        }
+    }
+
+    /**
+     * GuzzleHttp Client setup helper, broken out after constructor if user needs to use none config crdientials.
      * @param  string $apiUrl
      * @param  string $clientId
      * @param  string $clientSecret
@@ -133,6 +148,7 @@ class ViMbAdminClient
         $handlerStack->push($middleware->onFailure(5));
 
         $this->client = $client;
+        $this->isInitialised = true;
 
         return $this;
     }
@@ -144,6 +160,7 @@ class ViMbAdminClient
      */
     private function get(string $uri)
     {
+        $this->initialiseClient();
         $url = $this->apiUrl.'/'.$uri;
         $response = $this->client->get($url)->getBody();
         
@@ -158,6 +175,7 @@ class ViMbAdminClient
      */
     private function post(string $uri, $json)
     {
+        $this->initialiseClient();
         $url = $this->apiUrl.'/'.$uri;
         $response = $this->client->post($url, ['body' => $json])->getBody();
 
@@ -172,6 +190,7 @@ class ViMbAdminClient
      */
     private function patch(string $uri, $json)
     {
+        $this->initialiseClient();
         $url = $this->apiUrl.'/'.$uri;
         $response = $this->client->patch($url, ['body' => $json])->getBody();
 
