@@ -92,7 +92,7 @@ class ViMbAdminClient
         string $apiUrl,
         string $clientId,
         string $clientSecret,
-        string $tokenUri = '/oauth/token')
+        $tokenUri = '/oauth/token')
     {
         $handlerStack = HandlerStack::create();
         $client = new Client(

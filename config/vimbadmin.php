@@ -17,8 +17,8 @@ return [
     |
     | Your client id and secert are used to get osauth tokens
     */
-    'client_id' => env('VIMBADMIN_ID'),
-    'client_secret' => env('VIMBADMIN_SECRET'),
+    'client_id' => env('VIMBADMIN_ID', ''),
+    'client_secret' => env('VIMBADMIN_SECRET', ''),
 
     /*
     |--------------------------------------------------------------------------
