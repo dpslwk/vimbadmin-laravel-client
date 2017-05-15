@@ -79,17 +79,11 @@ If you discover any security related issues, please email dps.lwk@gmail.com inst
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
 
-[ico-version]: https://img.shields.io/packagist/v/dpslwk/ViMbAdminClient.svg?style=flat-square
+[ico-version]: https://img.shields.io/packagist/v/lwk/vimbadmin-laravel-client.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/dpslwk/ViMbAdminClient/master.svg?style=flat-square
-[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/dpslwk/ViMbAdminClient.svg?style=flat-square
-[ico-code-quality]: https://img.shields.io/scrutinizer/g/dpslwk/ViMbAdminClient.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/dpslwk/ViMbAdminClient.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/lwk/vimbadmin-laravel-client.svg?style=flat-square
 
-[link-packagist]: https://packagist.org/packages/dpslwk/ViMbAdminClient
-[link-travis]: https://travis-ci.org/dpslwk/ViMbAdminClient
-[link-scrutinizer]: https://scrutinizer-ci.com/g/dpslwk/ViMbAdminClient/code-structure
-[link-code-quality]: https://scrutinizer-ci.com/g/dpslwk/ViMbAdminClient
-[link-downloads]: https://packagist.org/packages/dpslwk/ViMbAdminClient
+[link-packagist]: https://packagist.org/packages/lwk/vimbadmin-laravel-client
+[link-downloads]: https://packagist.org/packages/lwk/vimbadmin-laravel-client
 [link-author]: https://github.com/dpslwk
 [link-contributors]: ../../contributors
