@@ -1,10 +1,7 @@
-# ViMbAdminClient
+# vimbadmin-laravel-client
 
 [![Latest Version on Packagist][ico-version]][link-packagist]
 [![Software License][ico-license]](LICENSE.md)
-[![Build Status][ico-travis]][link-travis]
-[![Coverage Status][ico-scrutinizer]][link-scrutinizer]
-[![Quality Score][ico-code-quality]][link-code-quality]
 [![Total Downloads][ico-downloads]][link-downloads]
 
 This is a laravel/(lumen?) client library for use with dpslwk/vimbadmin-api
@@ -18,25 +15,12 @@ The down side of ViMdAdmin is that it has no APi front end. At Nottingham Hacksp
 * http://nottinghack.org.uk
 * https://github.com/NottingHack/hms2
 
-## Structure
-
-If any of the following are applicable to your project, then the directory structure should follow industry best practises by being named the following.
-
-```
-bin/        
-config/
-src/
-test/
-vendor/
-```
-
-
 ## Install
 
 Via Composer
 
 ``` bash
-$ composer require dpslwk/ViMbAdminClient
+$ composer require lwk/vimbadmin-laravel-client
 ```
 
 Add the following to your `config/app.php` service provider list. 
@@ -54,7 +38,7 @@ Define setup in .env with the following values
 * `VIMBADMIN_MODEL` - Eloquent model
 * `VIMBADMIN_ENITITY` - Docrotine Entity
 
-or Publish the config
+or Publish the config and edit as needed
 ```
 php artisan vendor:publish --provider="LWK\ViMbAdmin\ViMbAdminServiceProvider" --tag=config
 ```
@@ -64,8 +48,8 @@ If using either `eloquent` or `doctrine` token storage db migrations and mapping
 ## Usage
 
 ``` php
-$skeleton = new LWK\ViMbAdmin();
-echo $skeleton->echoPhrase('Hello, League!');
+$client = App::make(LWK\ViMbAdminClient());
+echo $client->findDomains();
 ```
 
 ## Change log
