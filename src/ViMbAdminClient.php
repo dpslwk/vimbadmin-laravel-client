@@ -146,6 +146,7 @@ class ViMbAdminClient
     {
         $url = $this->apiUrl.'/'.$uri;
         $response = $this->client->get($url)->getBody();
+        
         return $this->serializer->deserialize($response, null, 'json');
     }
 
@@ -159,6 +160,7 @@ class ViMbAdminClient
     {
         $url = $this->apiUrl.'/'.$uri;
         $response = $this->client->post($url, ['body' => $json])->getBody();
+
         return $this->serializer->deserialize($response, null, 'json');
     }
 
@@ -172,6 +174,7 @@ class ViMbAdminClient
     {
         $url = $this->apiUrl.'/'.$uri;
         $response = $this->client->patch($url, ['body' => $json])->getBody();
+
         return $this->serializer->deserialize($response, null, 'json');
     }
 
@@ -181,7 +184,7 @@ class ViMbAdminClient
      * findAliasesForDomain.
      * @param  string $domainName
      * @param  string|null $query      an email address to look for
-     * @return Alias[]
+     * @return LWK\ViMbAdmin\Model\Alias[]|LWK\ViMbAdmin\Model\Error
      */
     public function findAliasesForDomain(string $domainName, $query = null)
     {
@@ -191,14 +194,16 @@ class ViMbAdminClient
             $uri = $domainName.'/aliases/?q='.$query;
         }
 
-        return $this->get($uri);
+        $response = $this->get($uri);
+
+        return array_key_exists('errors', $response) ? $response['errors'][0] : $response;
     }
 
     /**
      * findDomains.
      * @param  string|null       $query      a domain address to look for
      * @param  array|string|null $includes   string or array of includes e.g. ['mailboxes', 'aliases']
-     * @return Domain[]
+     * @return LWK\ViMbAdmin\Model\Domain[]|LWK\ViMbAdmin\Model\Error
      */
     public function findDomains($query = null, $includes = null)
     {
@@ -218,14 +223,16 @@ class ViMbAdminClient
             }
         }
 
-        return $this->get($uri);
+        $response = $this->get($uri);
+
+        return array_key_exists('errors', $response) ? $response['errors'][0] : $response;
     }
 
     /**
      * findMailboxesForDomain.
      * @param  string $domainName
      * @param  string|null $query      an email address to look for
-     * @return Mailbox[]
+     * @return LWK\ViMbAdmin\Model\Mailbox[]|LWK\ViMbAdmin\Model\Error
      */
     public function findMailboxesForDomain(string $domainName, $query = null)
     {
@@ -235,27 +242,30 @@ class ViMbAdminClient
             $uri = $domainName.'/mailboxes/?q='.$query;
         }
 
-        return $this->get($uri);
+        $response = $this->get($uri);
+
+        return array_key_exists('errors', $response) ? $response['errors'][0] : $response;
     }
 
     /**
      * getAliasForDomain.
      * @param  string $domainName
      * @param  int    $aliasId
-     * @return Alias
+     * @return LWK\ViMbAdmin\Model\Alias|LWK\ViMbAdmin\Model\Error
      */
     public function getAliasForDomain(string $domainName, int $aliasId)
     {
         $uri = $domainName.'/aliases/'.$aliasId ;
+        $response = $this->get($uri);
 
-        return $this->get($uri);
+        return array_key_exists('errors', $response) ? $response['errors'][0] : $response;
     }
  
     /**
      * getDomain.
      * @param  int    $domainId
      * @param  array|string|null $includes   string or array of includes e.g. ['mailboxes', 'aliases']
-     * @return Domain
+     * @return LWK\ViMbAdmin\Model\Domain|LWK\ViMbAdmin\Model\Error
      */
     public function getDomain(int $domainId, $includes = null)
     {
@@ -269,41 +279,48 @@ class ViMbAdminClient
             }
         }
 
-        return $this->get($uri);
+        $response = $this->get($uri);
+
+        return array_key_exists('errors', $response) ? $response['errors'][0] : $response;
     }
 
     /**
      * getMailboxForDomain.
      * @param  string $domainName
      * @param  int    $mailboxId
-     * @return Mailbox
+     * @return LWK\ViMbAdmin\Model\Mailbox|LWK\ViMbAdmin\Model\Error
      */
     public function getMailboxForDomain(string $domainName, int $mailboxId)
     {
         $uri = $domainName.'/mailboxes/'.$mailboxId ;
+        $response = $this->get($uri);
 
-        return $this->get($uri);
+        return array_key_exists('errors', $response) ? $response['errors'][0] : $response;
     }
 
     /**
      * updateAlias.
      * @param  Alias $alias
-     * @return Link
+     * @return LWK\ViMbAdmin\Model\Link|LWK\ViMbAdmin\Model\Error
      */
     public function updateAlias(Alias $alias)
     {
         $uri = $alias->getDomain()->getDomain().'/aliases/'.$alias->getId();
-        return $this->patch($uri, json_encode($alias));
+        $response = $this->patch($uri, json_encode($alias));
+
+        return array_key_exists('errors', $response) ? $response['errors'][0] : $response;
     }
 
     /**
      * updateMailbox.
      * @param  Mailbox $mailbox
-     * @return Link
+     * @return LWK\ViMbAdmin\Model\Link|LWK\ViMbAdmin\Model\Error
      */
     public function updateMailbox(LWK\ViMbAdmin\Model\Mailbox $mailbox)
     {
         $uri = $mailboxes->getDomain()->getDomain().'/mailboxes/'.$mailbox->getId();
-        return $this->patch($uri, json_encode($mailbox));
+        $response = $this->patch($uri, json_encode($mailbox));
+
+        return array_key_exists('errors', $response) ? $response['errors'][0] : $response;
     }
 }

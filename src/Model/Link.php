@@ -2,7 +2,7 @@
 
 namespace LWK\ViMbAdmin\Model;
 
-class Link implements \JsonSerializable
+class Link
 {
     /**
      * @var string
@@ -60,16 +60,5 @@ class Link implements \JsonSerializable
         $this->related = $related;
 
         return $this;
-    }
-
-    /**
-     * jsonSerializer used to pass back to API
-     * @return array
-     */
-    public function jsonSerialize()
-    {
-        return [
-
-        ];
     }
 }

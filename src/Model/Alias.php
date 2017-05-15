@@ -138,7 +138,11 @@ class Alias implements \JsonSerializable
         return $this;
     }
 
-    public function addGoto(string $address)
+    /**
+     * Add one address to the forward.
+     * @param string $address email address to add
+     */
+    public function addForwardAddress(string $address)
     {
         if (! in_array($address, $this->goto)) {
             $this->goto[] = $address;
@@ -147,6 +151,19 @@ class Alias implements \JsonSerializable
         return $this;
     }
     
+    /**
+     * Remove one address form the forward.
+     * @param string $address email address to add
+     */
+    public function removeForwardAddress(string $address)
+    {
+        if (($key = array_search($address, $this->goto)) !== false) {
+            unset($this->goto[$key]);
+        }
+
+        return $this;
+    }
+
     /**
      * Gets the value of links.
      *

@@ -2,7 +2,7 @@
 
 namespace LWK\ViMbAdmin\Model;
 
-class Error implements \JsonSerializable
+class Error
 {
     /**
      * @var int
@@ -120,14 +120,19 @@ class Error implements \JsonSerializable
         return $this;
     }
 
-    /**
-     * jsonSerializer used to pass back to API
-     * @return array
-     */
-    public function jsonSerialize()
+    public function __toString()
     {
-        return [
-
-        ];
+        $error = '['.$this->status.':'.$this->title.'] '.$this->detail;
+        if ($this->meta) {
+            $error .= "\n";
+            foreach ($this->meta as $key => $value) {
+                $error .= ' '.$key.': ';
+                foreach ($value as $reason) {
+                    $error .= $reason.' ';
+                }
+                $error .= "\n";
+            }
+        }
+        return $error;
     }
 }
