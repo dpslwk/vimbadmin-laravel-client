@@ -23,6 +23,7 @@ class DoctrineToken implements ViMbAdminTokenContract
         $_token->token = $token;
         $_token->expires = $expires;
         $_token->type = $type;
+
         return $_token;
     }
 }

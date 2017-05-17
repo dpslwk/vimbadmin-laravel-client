@@ -63,7 +63,7 @@ class Relation implements \JsonSerializable
     }
 
     /**
-     * jsonSerializer used to pass back to API
+     * jsonSerializer used to pass back to API.
      * @return array
      */
     public function jsonSerialize()

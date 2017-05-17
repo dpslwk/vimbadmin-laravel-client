@@ -2,7 +2,6 @@
 
 namespace LWK\ViMbAdmin\Contracts;
 
-use LWK\ViMbAdmin\Contracts\ViMbAdminToken;
 use Sainsburys\Guzzle\Oauth2\GrantType\GrantTypeInterface;
 
 interface TokenStore

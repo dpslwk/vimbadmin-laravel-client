@@ -2,8 +2,8 @@
 
 namespace LWK\ViMbAdmin\Driver;
 
-use LWK\ViMbAdmin\Traits\SerializeKey;
 use LWK\ViMbAdmin\Model\JsonToken;
+use LWK\ViMbAdmin\Traits\SerializeKey;
 use Illuminate\Support\Facades\Storage;
 use LWK\ViMbAdmin\Contracts\ViMbAdminToken;
 use LWK\ViMbAdmin\Contracts\TokenStore as TokenStoreContract;
@@ -11,10 +11,10 @@ use LWK\ViMbAdmin\Contracts\TokenStore as TokenStoreContract;
 class JsonTokenStore implements TokenStoreContract
 {
     use SerializeKey;
-    
+
     /**
-     * In memory token store
-     * @var Array
+     * In memory token store.
+     * @var array
      */
     protected $tokens;
 
@@ -30,7 +30,6 @@ class JsonTokenStore implements TokenStoreContract
 
     /**
      * JsonTokenStore constructor.
-     *
      */
     public function __construct($app)
     {

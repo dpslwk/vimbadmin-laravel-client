@@ -2,8 +2,8 @@
 
 namespace LWK\ViMbAdmin\Model;
 
-use Illuminate\Database\Eloquent\Model;
 use LWK\ViMbAdmin\Traits\Token;
+use Illuminate\Database\Eloquent\Model;
 use LWK\ViMbAdmin\Contracts\ViMbAdminToken as ViMbAdminTokenContract;
 
 class EloquentToken extends Model implements ViMbAdminTokenContract
@@ -39,6 +39,7 @@ class EloquentToken extends Model implements ViMbAdminTokenContract
             'expires' => $expires,
             'type' => $type,
         ];
+
         return new static($data);
     }
 }

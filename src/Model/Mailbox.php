@@ -2,7 +2,6 @@
 
 namespace LWK\ViMbAdmin\Model;
 
-use LWK\ViMbAdmin\Model\Link;
 use LWK\ViMBAdmin\Model\Relation;
 
 class Mailbox implements \JsonSerializable
@@ -43,7 +42,7 @@ class Mailbox implements \JsonSerializable
     protected $domain;
 
     /**
-     * create a new Mailbox
+     * create a new Mailbox.
      * @param  string $username
      * @param  string $name
      * @param  Domain $domain
@@ -56,9 +55,9 @@ class Mailbox implements \JsonSerializable
         $_mailbox->username = $username;
         $_mailbox->name = $name;
         $_mailbox->domain = $domain;
+
         return $_mailbox;
     }
-
 
     /**
      * Gets the value of type.
@@ -229,7 +228,7 @@ class Mailbox implements \JsonSerializable
     }
 
     /**
-     * jsonSerializer used to pass back to API
+     * jsonSerializer used to pass back to API.
      * @return array
      */
     public function jsonSerialize()

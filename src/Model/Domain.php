@@ -2,9 +2,6 @@
 
 namespace LWK\ViMbAdmin\Model;
 
-use LWK\ViMbAdmin\Model\Link;
-use LWK\ViMbAdmin\Model\Alias;
-use LWK\ViMbAdmin\Model\Mailbox;
 use LWK\ViMBAdmin\Model\Relation;
 
 class Domain implements \JsonSerializable
@@ -165,7 +162,7 @@ class Domain implements \JsonSerializable
     }
 
     /**
-     * Add a relationship
+     * Add a relationship.
      *
      * @param LWK\ViMbAdmin\Model\Relation $realtion a relation
      *
@@ -203,7 +200,7 @@ class Domain implements \JsonSerializable
     }
 
     /**
-     * Add a mailbox
+     * Add a mailbox.
      *
      * @param LWK\ViMbAdmin\Model\Mailbox $mailbox a mailbox
      *
@@ -241,7 +238,7 @@ class Domain implements \JsonSerializable
     }
 
     /**
-     * Add an alias
+     * Add an alias.
      *
      * @param LWK\ViMbAdmin\Model\Alias $alias a alias
      *
@@ -255,7 +252,7 @@ class Domain implements \JsonSerializable
     }
 
     /**
-     * jsonSerializer used to pass back to API
+     * jsonSerializer used to pass back to API.
      * @return array
      */
     public function jsonSerialize()

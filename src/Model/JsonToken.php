@@ -31,6 +31,7 @@ class JsonToken implements ViMbAdminTokenContract, \JsonSerializable
         $_token->token = $token;
         $_token->expires = $expires;
         $_token->type = $type;
+
         return $_token;
     }
 
@@ -41,7 +42,7 @@ class JsonToken implements ViMbAdminTokenContract, \JsonSerializable
             'key' => $this->key,
             'token' => $this->token,
             'expires' => $this->expires->format(\DateTime::ISO8601),
-            'type' => $this->type
+            'type' => $this->type,
         ];
     }
 }

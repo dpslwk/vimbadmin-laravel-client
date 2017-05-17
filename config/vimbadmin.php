@@ -53,7 +53,6 @@ return [
             'entity' => env('VIMBADMIN_ENITITY'),
         ],
 
-
     ],
 
 ];

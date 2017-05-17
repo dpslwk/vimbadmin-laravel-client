@@ -133,6 +133,7 @@ class Error
                 $error .= "\n";
             }
         }
+
         return $error;
     }
 }

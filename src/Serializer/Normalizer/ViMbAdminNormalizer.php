@@ -25,7 +25,6 @@ class ViMbAdminNormalizer implements NormalizerInterface, DenormalizerInterface
     protected $propertyAccessor;
 
     /**
-     *
      * @param Inflector $inflector
      */
     public function __construct(Inflector $inflector, PropertyAccessorInterface $propertyAccessor = null)
@@ -43,7 +42,7 @@ class ViMbAdminNormalizer implements NormalizerInterface, DenormalizerInterface
      *
      * @return array|scalar
      */
-    public function normalize($object, $format = null, array $context = array())
+    public function normalize($object, $format = null, array $context = [])
     {
         // TODO: ???
     }
@@ -71,13 +70,13 @@ class ViMbAdminNormalizer implements NormalizerInterface, DenormalizerInterface
      *
      * @return object
      */
-    public function denormalize($data, $class, $format = null, array $context = array())
+    public function denormalize($data, $class, $format = null, array $context = [])
     {
         $normalizedData = (array) $data; // not sure i need this yet
         // default to an array object
         $object = [];
 
-        if (! isset($context['first_pass'])) {
+        if ( ! isset($context['first_pass'])) {
             $context['first_pass'] = true;
             if (count($normalizedData) == 1 && array_key_exists('links', $normalizedData)) {
                 // this must be link response to a post/patch request
@@ -89,6 +88,7 @@ class ViMbAdminNormalizer implements NormalizerInterface, DenormalizerInterface
                         // Properties not found are ignored
                     }
                 }
+
                 return $link;
             }
             // do we have an 'included' key?
@@ -152,7 +152,7 @@ class ViMbAdminNormalizer implements NormalizerInterface, DenormalizerInterface
                     break;
                 case 'links':
                     // create a new Link object and add it to the $object if its not an array object
-                    if (! $object) {
+                    if ( ! $object) {
                         continue;
                     }
                     $link = new Link();
@@ -185,7 +185,7 @@ class ViMbAdminNormalizer implements NormalizerInterface, DenormalizerInterface
                         } else {
                             $relationships = $relations['data'];
                         }
-                        if (! $relationships) {
+                        if ( ! $relationships) {
                             continue;
                         }
 
@@ -215,7 +215,7 @@ class ViMbAdminNormalizer implements NormalizerInterface, DenormalizerInterface
                                     break;
 
                                 default:
-                                    # code...
+                                    // code...
                                     break;
                             }
                         }
@@ -237,7 +237,7 @@ class ViMbAdminNormalizer implements NormalizerInterface, DenormalizerInterface
                     break;
 
                 default:
-                    # code...
+                    // code...
                     break;
             }
         }

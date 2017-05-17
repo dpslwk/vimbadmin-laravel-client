@@ -2,7 +2,6 @@
 
 namespace LWK\ViMbAdmin;
 
-use LWK\ViMbAdmin\TokenStoreManager;
 use Illuminate\Support\ServiceProvider;
 use LWK\ViMbAdmin\Contracts\TokenStore;
 
@@ -37,7 +36,7 @@ class ViMbAdminServiceProvider extends ServiceProvider
     }
 
     /**
-     * Merge config
+     * Merge config.
      */
     protected function mergeConfig()
     {

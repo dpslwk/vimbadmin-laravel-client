@@ -4,7 +4,6 @@ namespace LWK\ViMbAdmin;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\HandlerStack;
-use GuzzleHttp\Psr7\Request;
 use LWK\ViMbAdmin\Model\Alias;
 use LWK\ViMbAdmin\Model\Mailbox;
 use LWK\ViMbAdmin\Contracts\TokenStore;
@@ -76,11 +75,11 @@ class ViMbAdminClient
         $this->clientSecret = $config->get('vimbadmin.client_secret');
 
         $this->normalizer = $normalizer;
-        $this->serializer = new Serializer(array(
+        $this->serializer = new Serializer([
             $this->normalizer,
-        ), array(
+        ], [
             'json' => new JsonEncoder(),
-        ));
+        ]);
 
         $this->isInitialised = false;
     }
@@ -90,7 +89,7 @@ class ViMbAdminClient
      */
     public function initialiseClient()
     {
-        if (! $this->isInitialised) {
+        if ( ! $this->isInitialised) {
             $this->setupClient($this->apiUrl, $this->clientId, $this->clientSecret);
         }
     }
@@ -251,18 +250,18 @@ class ViMbAdminClient
     public function findDomains($query = null, $includes = null)
     {
         $uri = 'domains/?';
-        if (! is_null($query)) {
+        if ( ! is_null($query)) {
             $uri .= 'q=' . $query;
         }
-        if (! is_null($query) && ! is_null($includes)) {
+        if ( ! is_null($query) && ! is_null($includes)) {
             $uri .= '&';
         }
-        if (! is_null($includes)) {
+        if ( ! is_null($includes)) {
             $uri .= 'include=';
             if (is_string($includes)) {
                 $uri .= $includes;
             } else {
-                $uri .= implode(",", $includes);
+                $uri .= implode(',', $includes);
             }
         }
 
@@ -298,7 +297,7 @@ class ViMbAdminClient
      */
     public function getAliasForDomain(string $domainName, int $aliasId)
     {
-        $uri = $domainName.'/aliases/'.$aliasId ;
+        $uri = $domainName.'/aliases/'.$aliasId;
         $response = $this->get($uri);
 
         return array_key_exists('errors', $response) ? $response['errors'][0] : $response;
@@ -312,13 +311,13 @@ class ViMbAdminClient
      */
     public function getDomain(int $domainId, $includes = null)
     {
-        $uri = 'domains/'.$domainId ;
-        if (! is_null($includes)) {
+        $uri = 'domains/'.$domainId;
+        if ( ! is_null($includes)) {
             $uri .= '?include=';
             if (is_string($includes)) {
                 $uri .= $includes;
             } else {
-                $uri .= implode(",", $includes);
+                $uri .= implode(',', $includes);
             }
         }
 
@@ -335,7 +334,7 @@ class ViMbAdminClient
      */
     public function getMailboxForDomain(string $domainName, int $mailboxId)
     {
-        $uri = $domainName.'/mailboxes/'.$mailboxId ;
+        $uri = $domainName.'/mailboxes/'.$mailboxId;
         $response = $this->get($uri);
 
         return array_key_exists('errors', $response) ? $response['errors'][0] : $response;
