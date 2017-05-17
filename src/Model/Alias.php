@@ -43,6 +43,23 @@ class Alias implements \JsonSerializable
     protected $domain;
 
     /**
+     * create a new Alias
+     * @param  string $address
+     * @param  array $goto
+     * @param  Domain $domain
+     * @return Alias
+     */
+    static public function create(string $address, array $goto, Domain $domain)
+    {
+        $_alias = new static();
+        $_alias->type = 'aliases';
+        $_alias->address = $address;
+        $_alias->goto = $goto;
+        $_alias->domain = $domain;
+        return $_alias;
+    }
+
+    /**
      * Gets the value of type.
      *
      * @return string
@@ -150,7 +167,7 @@ class Alias implements \JsonSerializable
 
         return $this;
     }
-    
+
     /**
      * Remove one address form the forward.
      * @param string $address email address to add
