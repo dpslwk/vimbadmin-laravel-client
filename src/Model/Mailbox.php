@@ -43,6 +43,24 @@ class Mailbox implements \JsonSerializable
     protected $domain;
 
     /**
+     * create a new Mailbox
+     * @param  string $username
+     * @param  string $name
+     * @param  Domain $domain
+     * @return Mailbox
+     */
+    public static function create(string $username, string $name, Domain $domain)
+    {
+        $_mailbox = new static();
+        $_mailbox->type = 'mailboxes';
+        $_mailbox->username = $username;
+        $_mailbox->name = $name;
+        $_mailbox->domain = $domain;
+        return $_mailbox;
+    }
+
+
+    /**
      * Gets the value of type.
      *
      * @return string

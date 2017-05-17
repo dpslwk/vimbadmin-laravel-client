@@ -52,7 +52,7 @@ class ViMbAdminClient
      */
     protected $serializer;
 
-    /** 
+    /**
      * @var bool
      */
     protected $isInitialised;
@@ -163,7 +163,7 @@ class ViMbAdminClient
         $this->initialiseClient();
         $url = $this->apiUrl.'/'.$uri;
         $response = $this->client->get($url)->getBody();
-        
+
         return $this->serializer->deserialize($response, null, 'json');
     }
 
@@ -197,7 +197,31 @@ class ViMbAdminClient
         return $this->serializer->deserialize($response, null, 'json');
     }
 
-// createAlias($alias)
+    /**
+     * create a new Alias.
+     * @param  Alias $alias
+     * @return LWK\ViMbAdmin\Model\Alias|LWK\ViMbAdmin\Model\Error
+     */
+    public function createAlias(Alias $alias)
+    {
+        $uri = $alias->getDomain()->getDomain().'/aliases/'.$alias->getId();
+        $response = $this->post($uri, json_encode($alias));
+
+        return array_key_exists('errors', $response) ? $response['errors'][0] : $response;
+    }
+
+    /**
+     * create a new Mailbox.
+     * @param  Mailbox $mailbox
+     * @return LWK\ViMbAdmin\Model\Mialbox|LWK\ViMbAdmin\Model\Error
+     */
+    public function createMailbox(LWK\ViMbAdmin\Model\Mailbox $mailbox)
+    {
+        $uri = $mailboxes->getDomain()->getDomain().'/mailboxes/'.$mailbox->getId();
+        $response = $this->post($uri, json_encode($mailbox));
+
+        return array_key_exists('errors', $response) ? $response['errors'][0] : $response;
+    }
 
     /**
      * findAliasesForDomain.
@@ -279,7 +303,7 @@ class ViMbAdminClient
 
         return array_key_exists('errors', $response) ? $response['errors'][0] : $response;
     }
- 
+
     /**
      * getDomain.
      * @param  int    $domainId
