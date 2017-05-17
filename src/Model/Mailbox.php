@@ -49,7 +49,7 @@ class Mailbox implements \JsonSerializable
      * @param  Domain $domain
      * @return Mailbox
      */
-    static public function create(string $username, string $name, Domain $domain)
+    public static function create(string $username, string $name, Domain $domain)
     {
         $_mailbox = new static();
         $_mailbox->type = 'mailboxes';

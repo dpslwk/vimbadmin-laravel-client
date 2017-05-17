@@ -49,7 +49,7 @@ class Alias implements \JsonSerializable
      * @param  Domain $domain
      * @return Alias
      */
-    static public function create(string $address, array $goto, Domain $domain)
+    public static function create(string $address, array $goto, Domain $domain)
     {
         $_alias = new static();
         $_alias->type = 'aliases';
