@@ -4,6 +4,11 @@ All Notable changes to `ViMbAdminClient` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+## 1.0.4 (released 2017-05-28)
+
+### Fixed
+- fix mailbox create and upate routines
+
 ## 1.0.3 (released 2017-05-17)
 
 ### Added

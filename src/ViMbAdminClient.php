@@ -214,9 +214,9 @@ class ViMbAdminClient
      * @param  Mailbox $mailbox
      * @return LWK\ViMbAdmin\Model\Mialbox|LWK\ViMbAdmin\Model\Error
      */
-    public function createMailbox(LWK\ViMbAdmin\Model\Mailbox $mailbox)
+    public function createMailbox(Mailbox $mailbox)
     {
-        $uri = $mailboxes->getDomain()->getDomain().'/mailboxes/'.$mailbox->getId();
+        $uri = $mailbox->getDomain()->getDomain().'/mailboxes/'.$mailbox->getId();
         $response = $this->post($uri, json_encode($mailbox));
 
         return array_key_exists('errors', $response) ? $response['errors'][0] : $response;
@@ -358,9 +358,9 @@ class ViMbAdminClient
      * @param  Mailbox $mailbox
      * @return LWK\ViMbAdmin\Model\Link|LWK\ViMbAdmin\Model\Error
      */
-    public function updateMailbox(LWK\ViMbAdmin\Model\Mailbox $mailbox)
+    public function updateMailbox(Mailbox $mailbox)
     {
-        $uri = $mailboxes->getDomain()->getDomain().'/mailboxes/'.$mailbox->getId();
+        $uri = $mailbox->getDomain()->getDomain().'/mailboxes/'.$mailbox->getId();
         $response = $this->patch($uri, json_encode($mailbox));
 
         return array_key_exists('errors', $response) ? $response['errors'][0] : $response;
