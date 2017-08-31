@@ -23,7 +23,7 @@ Via Composer
 $ composer require lwk/vimbadmin-laravel-client
 ```
 
-Add the following to your `config/app.php` service provider list. 
+The following service provider will be autodiscovered for laravel 5.5+. 
 ```
 LWK\ViMbAdmin\ViMbAdminServiceProvider::class,
 ```
