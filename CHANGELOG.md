@@ -4,6 +4,12 @@ All Notable changes to `ViMbAdminClient` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+## 1.0.6 (released 2018-09-24)
+
+### Fixed
+- fix use of Symfony\Serializer in get/put helpers, as we use are own normaliser that does not care about $class argument
+
+
 ## 1.0.5 (released 2017-08-31)
 
 ### Added

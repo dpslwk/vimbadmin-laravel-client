@@ -163,7 +163,7 @@ class ViMbAdminClient
         $url = $this->apiUrl.'/'.$uri;
         $response = $this->client->get($url)->getBody();
 
-        return $this->serializer->deserialize($response, null, 'json');
+        return $this->serializer->deserialize($response, 'null', 'json');
     }
 
     /**
@@ -178,7 +178,7 @@ class ViMbAdminClient
         $url = $this->apiUrl.'/'.$uri;
         $response = $this->client->post($url, ['body' => $json])->getBody();
 
-        return $this->serializer->deserialize($response, null, 'json');
+        return $this->serializer->deserialize($response, 'null', 'json');
     }
 
     /**
