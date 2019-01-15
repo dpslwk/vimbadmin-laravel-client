@@ -4,6 +4,12 @@ All Notable changes to `ViMbAdminClient` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+## 1.0.7 (released 2019-01-15)
+
+### Fixed
+- fix use of Symfony\Serializer in patch helper, missed this in 1.0.6
+
+
 ## 1.0.6 (released 2018-09-24)
 
 ### Fixed

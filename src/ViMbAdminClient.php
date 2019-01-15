@@ -193,7 +193,7 @@ class ViMbAdminClient
         $url = $this->apiUrl.'/'.$uri;
         $response = $this->client->patch($url, ['body' => $json])->getBody();
 
-        return $this->serializer->deserialize($response, null, 'json');
+        return $this->serializer->deserialize($response, 'null', 'json');
     }
 
     /**
