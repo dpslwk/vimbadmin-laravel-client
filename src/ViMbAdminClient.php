@@ -66,8 +66,8 @@ class ViMbAdminClient
     public function __construct(
         TokenStore $tokenStore,
         \Illuminate\Config\Repository $config,
-        ViMbAdminNormalizer $normalizer)
-    {
+        ViMbAdminNormalizer $normalizer
+    ) {
         $this->tokenStore = $tokenStore;
         // TODO: strip traling / from url
         $this->apiUrl = $config->get('vimbadmin.api_url');

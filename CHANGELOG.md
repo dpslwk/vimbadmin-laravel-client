@@ -4,6 +4,11 @@ All Notable changes to `ViMbAdminClient` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+## 1.1.1 (released 2020-01-02)
+
+### Fixed
+- break not continue
+
 ## 1.1.0 (released 2019-12-21)
 
 ### Added

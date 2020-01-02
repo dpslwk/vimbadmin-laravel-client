@@ -153,7 +153,7 @@ class ViMbAdminNormalizer implements NormalizerInterface, DenormalizerInterface
                 case 'links':
                     // create a new Link object and add it to the $object if its not an array object
                     if ( ! $object) {
-                        continue;
+                        break;
                     }
                     $link = new Link();
                     foreach ($value as $key => $_value) {
@@ -186,7 +186,7 @@ class ViMbAdminNormalizer implements NormalizerInterface, DenormalizerInterface
                             $relationships = $relations['data'];
                         }
                         if ( ! $relationships) {
-                            continue;
+                            break;
                         }
 
                         foreach ($relationships as $relation) {
