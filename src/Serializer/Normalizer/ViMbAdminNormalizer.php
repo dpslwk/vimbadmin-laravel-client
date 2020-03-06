@@ -182,12 +182,14 @@ class ViMbAdminNormalizer implements NormalizerInterface, DenormalizerInterface
                     foreach ($value as $type => $relations) {
                         if (isset($relations['data']['type'])) {
                             $relationships = [$relations['data']];
-                        } else {
+                        } else if (isset($relations['data'])) {
                             $relationships = $relations['data'];
-                        }
-                        if ( ! $relationships) {
+                        } else {
                             break;
                         }
+                        // if ( ! $relationships) {
+                        //     break;
+                        // }
 
                         foreach ($relationships as $relation) {
                             $relationObject = new Relation();
