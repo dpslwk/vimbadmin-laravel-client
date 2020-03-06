@@ -4,6 +4,13 @@ All Notable changes to `ViMbAdminClient` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+## 1.1.2 (released 2020-03-06)
+
+### Fixed
+- Handle relationships with out data
+- Using array_key_exists() on objects is deprecated (php 7.4)
+
+
 ## 1.1.1 (released 2020-01-02)
 
 ### Fixed

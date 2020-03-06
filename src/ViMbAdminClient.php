@@ -206,7 +206,11 @@ class ViMbAdminClient
         $uri = $alias->getDomain()->getDomain().'/aliases/'.$alias->getId();
         $response = $this->post($uri, json_encode($alias));
 
-        return array_key_exists('errors', $response) ? $response['errors'][0] : $response;
+        if (is_array($response) && array_key_exists('errors', $response)) {
+            return $response['errors'][0];
+        }
+
+        return $response;
     }
 
     /**
@@ -219,7 +223,11 @@ class ViMbAdminClient
         $uri = $mailbox->getDomain()->getDomain().'/mailboxes/'.$mailbox->getId();
         $response = $this->post($uri, json_encode($mailbox));
 
-        return array_key_exists('errors', $response) ? $response['errors'][0] : $response;
+        if (is_array($response) && array_key_exists('errors', $response)) {
+            return $response['errors'][0];
+        }
+
+        return $response;
     }
 
     /**
@@ -238,7 +246,11 @@ class ViMbAdminClient
 
         $response = $this->get($uri);
 
-        return array_key_exists('errors', $response) ? $response['errors'][0] : $response;
+        if (is_array($response) && array_key_exists('errors', $response)) {
+            return $response['errors'][0];
+        }
+
+        return $response;
     }
 
     /**
@@ -267,7 +279,11 @@ class ViMbAdminClient
 
         $response = $this->get($uri);
 
-        return array_key_exists('errors', $response) ? $response['errors'][0] : $response;
+        if (is_array($response) && array_key_exists('errors', $response)) {
+            return $response['errors'][0];
+        }
+
+        return $response;
     }
 
     /**
@@ -286,7 +302,11 @@ class ViMbAdminClient
 
         $response = $this->get($uri);
 
-        return array_key_exists('errors', $response) ? $response['errors'][0] : $response;
+        if (is_array($response) && array_key_exists('errors', $response)) {
+            return $response['errors'][0];
+        }
+
+        return $response;
     }
 
     /**
@@ -300,7 +320,11 @@ class ViMbAdminClient
         $uri = $domainName.'/aliases/'.$aliasId;
         $response = $this->get($uri);
 
-        return array_key_exists('errors', $response) ? $response['errors'][0] : $response;
+        if (is_array($response) && array_key_exists('errors', $response)) {
+            return $response['errors'][0];
+        }
+
+        return $response;
     }
 
     /**
@@ -323,7 +347,11 @@ class ViMbAdminClient
 
         $response = $this->get($uri);
 
-        return array_key_exists('errors', $response) ? $response['errors'][0] : $response;
+        if (is_array($response) && array_key_exists('errors', $response)) {
+            return $response['errors'][0];
+        }
+
+        return $response;
     }
 
     /**
@@ -337,7 +365,11 @@ class ViMbAdminClient
         $uri = $domainName.'/mailboxes/'.$mailboxId;
         $response = $this->get($uri);
 
-        return array_key_exists('errors', $response) ? $response['errors'][0] : $response;
+        if (is_array($response) && array_key_exists('errors', $response)) {
+            return $response['errors'][0];
+        }
+
+        return $response;
     }
 
     /**
@@ -350,7 +382,11 @@ class ViMbAdminClient
         $uri = $alias->getDomain()->getDomain().'/aliases/'.$alias->getId();
         $response = $this->patch($uri, json_encode($alias));
 
-        return array_key_exists('errors', $response) ? $response['errors'][0] : $response;
+        if (is_array($response) && array_key_exists('errors', $response)) {
+            return $response['errors'][0];
+        }
+
+        return $response;
     }
 
     /**
@@ -363,6 +399,10 @@ class ViMbAdminClient
         $uri = $mailbox->getDomain()->getDomain().'/mailboxes/'.$mailbox->getId();
         $response = $this->patch($uri, json_encode($mailbox));
 
-        return array_key_exists('errors', $response) ? $response['errors'][0] : $response;
+        if (is_array($response) && array_key_exists('errors', $response)) {
+            return $response['errors'][0];
+        }
+
+        return $response;
     }
 }
