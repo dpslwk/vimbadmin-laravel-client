@@ -4,6 +4,12 @@ All Notable changes to `ViMbAdminClient` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+## 1.1.3 (released 2021-01-11)
+
+### Fixed
+- Remove defaults from config
+- Separate Guzzle Client for oauth
+
 ## 1.1.2 (released 2020-03-06)
 
 ### Fixed

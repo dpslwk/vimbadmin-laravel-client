@@ -108,12 +108,9 @@ class ViMbAdminClient
         string $clientSecret,
         $tokenUri = '/oauth/token')
     {
-        $handlerStack = HandlerStack::create();
-        $client = new Client(
+        $oauthClient = new Client(
             [
-                'handler'=> $handlerStack,
                 'base_uri' => $apiUrl,
-                'auth' => 'oauth2',
                 'headers' => [
                     'Accept'       => 'application/json',
                     'Content-Type' => 'application/json',
@@ -128,8 +125,8 @@ class ViMbAdminClient
             ClientCredentials::CONFIG_TOKEN_URL => $tokenUri,
         ];
 
-        $grant = new ClientCredentials($client, $config);
-        $middleware = new ViMbAdminOAuthMiddleware($client, $grant, null, $this->tokenStore);
+        $grant = new ClientCredentials($oauthClient, $config);
+        $middleware = new ViMbAdminOAuthMiddleware($oauthClient, $grant, null, $this->tokenStore);
 
         // see if we have a token already and load it.
         $key = $this->tokenStore->serializeKey($grant);
@@ -143,10 +140,22 @@ class ViMbAdminClient
             $middleware->setAccessToken($accessToken);
         }
 
+        $handlerStack = HandlerStack::create();
         $handlerStack->push($middleware->onBefore());
         $handlerStack->push($middleware->onFailure(5));
 
-        $this->client = $client;
+        $this->client = new Client(
+            [
+                'handler'=> $handlerStack,
+                'base_uri' => $apiUrl,
+                'auth' => 'oauth2',
+                'headers' => [
+                    'Accept'       => 'application/json',
+                    'Content-Type' => 'application/json',
+                ],
+                'exceptions' => false,
+            ]
+        );
         $this->isInitialised = true;
 
         return $this;
