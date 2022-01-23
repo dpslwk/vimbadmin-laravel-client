@@ -4,6 +4,14 @@ All Notable changes to `ViMbAdminClient` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+## 1.2.0 (released 2022-01-23)
+
+### Changed
+-- php minimum is now ^7.4, also supports ^8.0
+-- support for Laravel 8 & 9 added, removed 5.*
+-- Guzzel 7 is now require in place of 6
+-- guzzle-oauth2-plugin fork switched (sainsburys -> qbnk) to support Guzzel 7
+
 ## 1.1.3 (released 2021-01-11)
 
 ### Fixed

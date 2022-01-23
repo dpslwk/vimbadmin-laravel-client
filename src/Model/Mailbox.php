@@ -42,7 +42,7 @@ class Mailbox implements \JsonSerializable
     protected $domain;
 
     /**
-     * create a new Mailbox.
+     * Create a new Mailbox.
      * @param  string $username
      * @param  string $name
      * @param  Domain $domain
@@ -231,7 +231,7 @@ class Mailbox implements \JsonSerializable
      * jsonSerializer used to pass back to API.
      * @return array
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         return [
             'data' => [

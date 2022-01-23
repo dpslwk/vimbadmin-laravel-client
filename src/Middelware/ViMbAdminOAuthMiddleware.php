@@ -4,9 +4,9 @@ namespace LWK\ViMbAdmin\Middelware;
 
 use GuzzleHttp\ClientInterface;
 use LWK\ViMbAdmin\Contracts\TokenStore;
-use Sainsburys\Guzzle\Oauth2\Middleware\OAuthMiddleware;
-use Sainsburys\Guzzle\Oauth2\GrantType\GrantTypeInterface;
-use Sainsburys\Guzzle\Oauth2\GrantType\RefreshTokenGrantTypeInterface;
+use QBNK\Guzzle\Oauth2\Middleware\OAuthMiddleware;
+use QBNK\Guzzle\Oauth2\GrantType\GrantTypeInterface;
+use QBNK\Guzzle\Oauth2\GrantType\RefreshTokenGrantTypeInterface;
 
 class ViMbAdminOAuthMiddleware extends OAuthMiddleware
 {

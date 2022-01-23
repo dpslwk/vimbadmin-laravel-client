@@ -7,11 +7,11 @@ use GuzzleHttp\HandlerStack;
 use LWK\ViMbAdmin\Model\Alias;
 use LWK\ViMbAdmin\Model\Mailbox;
 use LWK\ViMbAdmin\Contracts\TokenStore;
-use Sainsburys\Guzzle\Oauth2\AccessToken;
+use QBNK\Guzzle\Oauth2\AccessToken;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use LWK\ViMbAdmin\Middelware\ViMbAdminOAuthMiddleware;
-use Sainsburys\Guzzle\Oauth2\GrantType\ClientCredentials;
+use QBNK\Guzzle\Oauth2\GrantType\ClientCredentials;
 use LWK\ViMbAdmin\Serializer\Normalizer\ViMbAdminNormalizer;
 
 class ViMbAdminClient
@@ -89,7 +89,7 @@ class ViMbAdminClient
      */
     public function initialiseClient()
     {
-        if ( ! $this->isInitialised) {
+        if (! $this->isInitialised) {
             $this->setupClient($this->apiUrl, $this->clientId, $this->clientSecret);
         }
     }
@@ -106,8 +106,8 @@ class ViMbAdminClient
         string $apiUrl,
         string $clientId,
         string $clientSecret,
-        $tokenUri = '/oauth/token')
-    {
+        $tokenUri = '/oauth/token'
+    ) {
         $oauthClient = new Client(
             [
                 'base_uri' => $apiUrl,
@@ -162,21 +162,21 @@ class ViMbAdminClient
     }
 
     /**
-     * internal get helper.
+     * Internal get helper.
      * @param  string $uri
      * @return mixed
      */
     private function get(string $uri)
     {
         $this->initialiseClient();
-        $url = $this->apiUrl.'/'.$uri;
+        $url = $this->apiUrl . '/' . $uri;
         $response = $this->client->get($url)->getBody();
 
         return $this->serializer->deserialize($response, 'null', 'json');
     }
 
     /**
-     * internal post helper.
+     * Internal post helper.
      * @param  string $uri
      * @param  string $json
      * @return mixed
@@ -184,14 +184,14 @@ class ViMbAdminClient
     private function post(string $uri, $json)
     {
         $this->initialiseClient();
-        $url = $this->apiUrl.'/'.$uri;
+        $url = $this->apiUrl . '/' . $uri;
         $response = $this->client->post($url, ['body' => $json])->getBody();
 
         return $this->serializer->deserialize($response, 'null', 'json');
     }
 
     /**
-     * internal patch helper.
+     * Internal patch helper.
      * @param  string $uri
      * @param  string $json
      * @return mixed
@@ -199,20 +199,20 @@ class ViMbAdminClient
     private function patch(string $uri, $json)
     {
         $this->initialiseClient();
-        $url = $this->apiUrl.'/'.$uri;
+        $url = $this->apiUrl . '/' . $uri;
         $response = $this->client->patch($url, ['body' => $json])->getBody();
 
         return $this->serializer->deserialize($response, 'null', 'json');
     }
 
     /**
-     * create a new Alias.
+     * Create a new Alias.
      * @param  Alias $alias
      * @return LWK\ViMbAdmin\Model\Alias|LWK\ViMbAdmin\Model\Error
      */
     public function createAlias(Alias $alias)
     {
-        $uri = $alias->getDomain()->getDomain().'/aliases/'.$alias->getId();
+        $uri = $alias->getDomain()->getDomain() . '/aliases/' . $alias->getId();
         $response = $this->post($uri, json_encode($alias));
 
         if (is_array($response) && array_key_exists('errors', $response)) {
@@ -223,13 +223,13 @@ class ViMbAdminClient
     }
 
     /**
-     * create a new Mailbox.
+     * Create a new Mailbox.
      * @param  Mailbox $mailbox
      * @return LWK\ViMbAdmin\Model\Mialbox|LWK\ViMbAdmin\Model\Error
      */
     public function createMailbox(Mailbox $mailbox)
     {
-        $uri = $mailbox->getDomain()->getDomain().'/mailboxes/'.$mailbox->getId();
+        $uri = $mailbox->getDomain()->getDomain() . '/mailboxes/' . $mailbox->getId();
         $response = $this->post($uri, json_encode($mailbox));
 
         if (is_array($response) && array_key_exists('errors', $response)) {
@@ -248,9 +248,9 @@ class ViMbAdminClient
     public function findAliasesForDomain(string $domainName, $query = null)
     {
         if (is_null($query)) {
-            $uri = $domainName.'/aliases/';
+            $uri = $domainName . '/aliases/';
         } else {
-            $uri = $domainName.'/aliases/?q='.$query;
+            $uri = $domainName . '/aliases/?q=' . $query;
         }
 
         $response = $this->get($uri);
@@ -271,13 +271,13 @@ class ViMbAdminClient
     public function findDomains($query = null, $includes = null)
     {
         $uri = 'domains/?';
-        if ( ! is_null($query)) {
+        if (! is_null($query)) {
             $uri .= 'q=' . $query;
         }
-        if ( ! is_null($query) && ! is_null($includes)) {
+        if (! is_null($query) && ! is_null($includes)) {
             $uri .= '&';
         }
-        if ( ! is_null($includes)) {
+        if (! is_null($includes)) {
             $uri .= 'include=';
             if (is_string($includes)) {
                 $uri .= $includes;
@@ -304,9 +304,9 @@ class ViMbAdminClient
     public function findMailboxesForDomain(string $domainName, $query = null)
     {
         if (is_null($query)) {
-            $uri = $domainName.'/mailboxes/';
+            $uri = $domainName . '/mailboxes/';
         } else {
-            $uri = $domainName.'/mailboxes/?q='.$query;
+            $uri = $domainName . '/mailboxes/?q=' . $query;
         }
 
         $response = $this->get($uri);
@@ -326,7 +326,7 @@ class ViMbAdminClient
      */
     public function getAliasForDomain(string $domainName, int $aliasId)
     {
-        $uri = $domainName.'/aliases/'.$aliasId;
+        $uri = $domainName . '/aliases/' . $aliasId;
         $response = $this->get($uri);
 
         if (is_array($response) && array_key_exists('errors', $response)) {
@@ -344,8 +344,8 @@ class ViMbAdminClient
      */
     public function getDomain(int $domainId, $includes = null)
     {
-        $uri = 'domains/'.$domainId;
-        if ( ! is_null($includes)) {
+        $uri = 'domains/' . $domainId;
+        if (! is_null($includes)) {
             $uri .= '?include=';
             if (is_string($includes)) {
                 $uri .= $includes;
@@ -371,7 +371,7 @@ class ViMbAdminClient
      */
     public function getMailboxForDomain(string $domainName, int $mailboxId)
     {
-        $uri = $domainName.'/mailboxes/'.$mailboxId;
+        $uri = $domainName . '/mailboxes/' . $mailboxId;
         $response = $this->get($uri);
 
         if (is_array($response) && array_key_exists('errors', $response)) {
@@ -388,7 +388,7 @@ class ViMbAdminClient
      */
     public function updateAlias(Alias $alias)
     {
-        $uri = $alias->getDomain()->getDomain().'/aliases/'.$alias->getId();
+        $uri = $alias->getDomain()->getDomain() . '/aliases/' . $alias->getId();
         $response = $this->patch($uri, json_encode($alias));
 
         if (is_array($response) && array_key_exists('errors', $response)) {
@@ -405,7 +405,7 @@ class ViMbAdminClient
      */
     public function updateMailbox(Mailbox $mailbox)
     {
-        $uri = $mailbox->getDomain()->getDomain().'/mailboxes/'.$mailbox->getId();
+        $uri = $mailbox->getDomain()->getDomain() . '/mailboxes/' . $mailbox->getId();
         $response = $this->patch($uri, json_encode($mailbox));
 
         if (is_array($response) && array_key_exists('errors', $response)) {

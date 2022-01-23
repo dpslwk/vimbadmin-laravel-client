@@ -2,7 +2,7 @@
 
 namespace LWK\ViMbAdmin\Contracts;
 
-use Sainsburys\Guzzle\Oauth2\GrantType\GrantTypeInterface;
+use QBNK\Guzzle\Oauth2\GrantType\GrantTypeInterface;
 
 interface TokenStore
 {
@@ -18,7 +18,7 @@ interface TokenStore
      * @param  string   $key
      * @param  string   $token
      * @param  DateTime $expires
-     * @param string $type
+     * @param  string $type
      * @return LWK\ViMbAdmin\Contracts\ViMbAdminToken
      */
     public function create(string $key, string $token, \DateTime $expires, string $type);

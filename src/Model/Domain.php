@@ -255,7 +255,7 @@ class Domain implements \JsonSerializable
      * jsonSerializer used to pass back to API.
      * @return array
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         return [
             'data' => [

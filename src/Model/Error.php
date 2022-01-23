@@ -122,13 +122,13 @@ class Error
 
     public function __toString()
     {
-        $error = '['.$this->status.':'.$this->title.'] '.$this->detail;
+        $error = '[' . $this->status . ':' . $this->title . '] ' . $this->detail;
         if ($this->meta) {
             $error .= "\n";
             foreach ($this->meta as $key => $value) {
-                $error .= ' '.$key.': ';
+                $error .= ' ' . $key . ': ';
                 foreach ($value as $reason) {
-                    $error .= $reason.' ';
+                    $error .= $reason . ' ';
                 }
                 $error .= "\n";
             }

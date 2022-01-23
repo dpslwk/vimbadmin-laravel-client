@@ -42,7 +42,7 @@ class Alias implements \JsonSerializable
     protected $domain;
 
     /**
-     * create a new Alias.
+     * Create a new Alias.
      * @param  string $address
      * @param  array $goto
      * @param  Domain $domain
@@ -161,7 +161,7 @@ class Alias implements \JsonSerializable
      */
     public function addForwardAddress(string $address)
     {
-        if ( ! in_array($address, $this->goto)) {
+        if (! in_array($address, $this->goto)) {
             $this->goto[] = $address;
         }
 
@@ -257,7 +257,7 @@ class Alias implements \JsonSerializable
      * jsonSerializer used to pass back to API.
      * @return array
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         return [
             'data' => [

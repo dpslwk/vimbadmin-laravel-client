@@ -40,9 +40,7 @@ class ViMbAdminServiceProvider extends ServiceProvider
      */
     protected function mergeConfig()
     {
-        $this->mergeConfigFrom(
-            $this->getConfigPath(), 'vimbadmin'
-        );
+        $this->mergeConfigFrom($this->getConfigPath(), 'vimbadmin');
     }
 
     /**

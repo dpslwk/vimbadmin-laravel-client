@@ -2,7 +2,7 @@
 
 namespace LWK\ViMbAdmin\Traits;
 
-use Sainsburys\Guzzle\Oauth2\GrantType\GrantTypeInterface;
+use QBNK\Guzzle\Oauth2\GrantType\GrantTypeInterface;
 
 trait SerializeKey
 {

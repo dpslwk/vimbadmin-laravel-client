@@ -17,7 +17,7 @@ class TokenStoreManager extends Manager
      */
     protected function createJsonDriver()
     {
-        return new JsonTokenStore($this->app);
+        return new JsonTokenStore($this->container);
     }
 
     /**
@@ -27,7 +27,7 @@ class TokenStoreManager extends Manager
      */
     protected function createEloquentDriver()
     {
-        return new EloquentTokenStore($this->app);
+        return new EloquentTokenStore($this->container);
     }
 
     /**
@@ -37,7 +37,7 @@ class TokenStoreManager extends Manager
      */
     protected function createDoctrineDriver()
     {
-        return new DoctrineTokenStore($this->app['em'], $this->app['em']->getClassMetaData(DoctrineToken::class));
+        return new DoctrineTokenStore($this->container['em'], $this->container['em']->getClassMetaData(DoctrineToken::class));
     }
 
     /**
@@ -47,6 +47,6 @@ class TokenStoreManager extends Manager
      */
     public function getDefaultDriver()
     {
-        return $this->app['config']['vimbadmin.driver'];
+        return $this->container['config']['vimbadmin.driver'];
     }
 }

@@ -2,34 +2,28 @@
 
 namespace LWK\ViMbAdmin\Serializer\Normalizer;
 
-use LWK\ViMbAdmin\Model\Link;
+use Illuminate\Support\Str;
 use LWK\ViMbAdmin\Model\Error;
+use LWK\ViMbAdmin\Model\Link;
 use LWK\ViMbAdmin\Model\Relation;
-use Doctrine\Common\Inflector\Inflector;
+use Symfony\Component\PropertyAccess\Exception\NoSuchPropertyException;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
-use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
-use Symfony\Component\PropertyAccess\Exception\NoSuchPropertyException;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 class ViMbAdminNormalizer implements NormalizerInterface, DenormalizerInterface
 {
-    /**
-     * @var Symfony\Component\Inflector\Inflector
-     */
-    protected $inflector;
-
     /**
      * @var PropertyAccessorInterface
      */
     protected $propertyAccessor;
 
     /**
-     * @param Inflector $inflector
+     * @param PropertyAccessorInterface $propertyAccessor
      */
-    public function __construct(Inflector $inflector, PropertyAccessorInterface $propertyAccessor = null)
+    public function __construct(PropertyAccessorInterface $propertyAccessor = null)
     {
-        $this->inflector = $inflector;
         $this->propertyAccessor = $propertyAccessor ?: PropertyAccess::createPropertyAccessor();
     }
 
@@ -76,7 +70,7 @@ class ViMbAdminNormalizer implements NormalizerInterface, DenormalizerInterface
         // default to an array object
         $object = [];
 
-        if ( ! isset($context['first_pass'])) {
+        if (! isset($context['first_pass'])) {
             $context['first_pass'] = true;
             if (count($normalizedData) == 1 && array_key_exists('links', $normalizedData)) {
                 // this must be link response to a post/patch request
@@ -97,8 +91,8 @@ class ViMbAdminNormalizer implements NormalizerInterface, DenormalizerInterface
             if (isset($normalizedData['included'])) {
                 $context['processing_includes'] = true;
                 foreach ($normalizedData['included'] as $include) {
-                    $singleType = ucfirst($this->inflector->singularize($include['type']));
-                    $includelCass = 'LWK\ViMbAdmin\Model\\'.$singleType;
+                    $singleType = Str::ucfirst(Str::singular($include['type']));
+                    $includelCass = 'LWK\ViMbAdmin\Model\\' . $singleType;
                     $includeObject = $this->denormalize($include, $includelCass, $format, $context);
                     $context[$includeObject->getType()][$includeObject->getId()] = $includeObject;
                 }
@@ -111,8 +105,8 @@ class ViMbAdminNormalizer implements NormalizerInterface, DenormalizerInterface
         }
 
         if (array_key_exists('type', $normalizedData)) {
-            $singleType = ucfirst($this->inflector->singularize($normalizedData['type']));
-            $class = 'LWK\ViMbAdmin\Model\\'.$singleType;
+            $singleType = Str::ucfirst(Str::singular($normalizedData['type']));
+            $class = 'LWK\ViMbAdmin\Model\\' . $singleType;
             $reflectionClass = new \ReflectionClass($class);
             $object = $reflectionClass->newInstanceArgs();
         }
@@ -122,8 +116,8 @@ class ViMbAdminNormalizer implements NormalizerInterface, DenormalizerInterface
                 case 'data':
                     // if this is an arrary of objects we need to foreach recursive call, if not just recursive call???
                     foreach ($value as $data) {
-                        $singleType = ucfirst($this->inflector->singularize($data['type']));
-                        $class = 'LWK\ViMbAdmin\Model\\'.$singleType;
+                        $singleType = Str::ucfirst(Str::singular($data['type']));
+                        $class = 'LWK\ViMbAdmin\Model\\' . $singleType;
                         $object[] = $this->denormalize($data, $class, $format, $context);
                     }
                     break;
@@ -152,7 +146,7 @@ class ViMbAdminNormalizer implements NormalizerInterface, DenormalizerInterface
                     break;
                 case 'links':
                     // create a new Link object and add it to the $object if its not an array object
-                    if ( ! $object) {
+                    if (! $object) {
                         break;
                     }
                     $link = new Link();
@@ -182,12 +176,12 @@ class ViMbAdminNormalizer implements NormalizerInterface, DenormalizerInterface
                     foreach ($value as $type => $relations) {
                         if (isset($relations['data']['type'])) {
                             $relationships = [$relations['data']];
-                        } else if (isset($relations['data'])) {
+                        } elseif (isset($relations['data'])) {
                             $relationships = $relations['data'];
                         } else {
                             break;
                         }
-                        // if ( ! $relationships) {
+                        // if (! $relationships) {
                         //     break;
                         // }
 

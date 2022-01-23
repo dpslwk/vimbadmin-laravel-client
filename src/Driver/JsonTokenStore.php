@@ -2,11 +2,12 @@
 
 namespace LWK\ViMbAdmin\Driver;
 
+use Illuminate\Contracts\Container\Container;
+use Illuminate\Support\Facades\Storage;
+use LWK\ViMbAdmin\Contracts\TokenStore as TokenStoreContract;
+use LWK\ViMbAdmin\Contracts\ViMbAdminToken;
 use LWK\ViMbAdmin\Model\JsonToken;
 use LWK\ViMbAdmin\Traits\SerializeKey;
-use Illuminate\Support\Facades\Storage;
-use LWK\ViMbAdmin\Contracts\ViMbAdminToken;
-use LWK\ViMbAdmin\Contracts\TokenStore as TokenStoreContract;
 
 class JsonTokenStore implements TokenStoreContract
 {
@@ -30,10 +31,12 @@ class JsonTokenStore implements TokenStoreContract
 
     /**
      * JsonTokenStore constructor.
+     *
+     * @param Container $container
      */
-    public function __construct($app)
+    public function __construct(Container $container)
     {
-        $config = $app['config']->get('vimbadmin.providers.json', []);
+        $config = $container['config']->get('vimbadmin.providers.json', []);
         $this->tokenFile = $config['file'];
 
         $this->loadTokens();
