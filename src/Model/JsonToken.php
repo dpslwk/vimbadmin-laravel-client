@@ -35,7 +35,8 @@ class JsonToken implements ViMbAdminTokenContract, \JsonSerializable
         return $_token;
     }
 
-    public function jsonSerialize(): mixed
+    #[\ReturnTypeWillChange]
+    public function jsonSerialize()
     {
         return [
             'id' => $this->id,

@@ -66,7 +66,8 @@ class Relation implements \JsonSerializable
      * jsonSerializer used to pass back to API.
      * @return array
      */
-    public function jsonSerialize(): mixed
+    #[\ReturnTypeWillChange]
+    public function jsonSerialize()
     {
         return [
 

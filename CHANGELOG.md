@@ -4,6 +4,11 @@ All Notable changes to `ViMbAdminClient` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+## 1.2.1 (released 2022-01-24)
+
+### Fixed
+-- jsonSerialize() use `#[\ReturnTypeWillChange]`rather than `: mixed`
+
 ## 1.2.0 (released 2022-01-23)
 
 ### Changed
