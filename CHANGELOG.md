@@ -4,6 +4,11 @@ All Notable changes to `ViMbAdminClient` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+## 1.2.2 (released 2023-02-16)
+
+### Added
+- support for Laravel 10
+
 ## 1.2.1 (released 2022-01-24)
 
 ### Fixed
