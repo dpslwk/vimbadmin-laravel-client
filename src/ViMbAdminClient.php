@@ -7,11 +7,11 @@ use GuzzleHttp\HandlerStack;
 use LWK\ViMbAdmin\Model\Alias;
 use LWK\ViMbAdmin\Model\Mailbox;
 use LWK\ViMbAdmin\Contracts\TokenStore;
-use QBNK\Guzzle\Oauth2\AccessToken;
+use Sainsburys\Guzzle\Oauth2\AccessToken;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use LWK\ViMbAdmin\Middelware\ViMbAdminOAuthMiddleware;
-use QBNK\Guzzle\Oauth2\GrantType\ClientCredentials;
+use Sainsburys\Guzzle\Oauth2\GrantType\ClientCredentials;
 use LWK\ViMbAdmin\Serializer\Normalizer\ViMbAdminNormalizer;
 
 class ViMbAdminClient

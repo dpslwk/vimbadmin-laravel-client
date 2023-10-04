@@ -4,6 +4,11 @@ All Notable changes to `ViMbAdminClient` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+## 1.2.3 (released 2023-10-04)
+
+### Added
+- fix switch back of guzzle-oauth2-plugin (qbnk -> sainsburys)
+
 ## 1.2.2 (released 2023-02-16)
 
 ### Added
