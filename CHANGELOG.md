@@ -4,6 +4,11 @@ All Notable changes to `ViMbAdminClient` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+## 1.2.4 (released 2024-08-03)
+
+### Fixed
+- L10?
+
 ## 1.2.3 (released 2023-10-04)
 
 ### Added
