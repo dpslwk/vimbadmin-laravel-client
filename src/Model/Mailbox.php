@@ -27,6 +27,11 @@ class Mailbox implements \JsonSerializable
     protected $name;
 
     /**
+     * @var null|string
+     */
+    protected $password;
+
+    /**
      * @var LWK\ViMBAdmin\Model\Link
      */
     protected $links;
@@ -46,15 +51,17 @@ class Mailbox implements \JsonSerializable
      * @param  string $username
      * @param  string $name
      * @param  Domain $domain
+     * @param  string $password
      * @return Mailbox
      */
-    public static function create(string $username, string $name, Domain $domain)
+    public static function create(string $username, string $name, Domain $domain, string $password = null)
     {
         $_mailbox = new static();
         $_mailbox->type = 'mailboxes';
         $_mailbox->username = $username;
         $_mailbox->name = $name;
         $_mailbox->domain = $domain;
+        $_mailbox->password = $password;
 
         return $_mailbox;
     }
@@ -228,6 +235,26 @@ class Mailbox implements \JsonSerializable
     }
 
     /**
+     * @return null|string
+     */
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    /**
+     * @param null|string $password
+     *
+     * @return self
+     */
+    public function setPassword($password)
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    /**
      * jsonSerializer used to pass back to API.
      * @return array
      */
@@ -241,6 +268,7 @@ class Mailbox implements \JsonSerializable
                 'attributes' => [
                     'username' => $this->username,
                     'name'     => $this->name,
+                    'password' => $this->password,
                 ],
             ],
         ];
