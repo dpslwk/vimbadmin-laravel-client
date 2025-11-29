@@ -36,7 +36,7 @@ class ViMbAdminNormalizer implements NormalizerInterface, DenormalizerInterface
      *
      * @return array|scalar
      */
-    public function normalize($object, $format = null, $context = [])
+    public function normalize(mixed $data, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
     {
         // TODO: ???
     }
@@ -50,7 +50,7 @@ class ViMbAdminNormalizer implements NormalizerInterface, DenormalizerInterface
      *
      * @return bool
      */
-    public function supportsNormalization($data, $format = null, $context = [])
+    public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
     {
         // TODO: ???
     }
@@ -65,7 +65,7 @@ class ViMbAdminNormalizer implements NormalizerInterface, DenormalizerInterface
      *
      * @return object
      */
-    public function denormalize($data, $class, $format = null, $context = [])
+    public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
     {
         $normalizedData = (array) $data; // not sure i need this yet
         // default to an array object
@@ -252,7 +252,7 @@ class ViMbAdminNormalizer implements NormalizerInterface, DenormalizerInterface
      *
      * @return bool
      */
-    public function supportsDenormalization($data, $type, $format = null, $context = [])
+    public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
     {
         return is_array($data);
     }

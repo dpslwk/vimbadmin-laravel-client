@@ -4,6 +4,11 @@ All Notable changes to `ViMbAdminClient` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+## 1.2.7 (released 2025-11-29)
+
+### Fixed
+- fix Serializer interface
+
 ## 1.2.6 (released 2025-11-29)
 
 ### Changed
