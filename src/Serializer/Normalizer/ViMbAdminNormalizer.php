@@ -56,6 +56,26 @@ class ViMbAdminNormalizer implements NormalizerInterface, DenormalizerInterface
     }
 
     /**
+     * Returns the types potentially supported by this normalizer.
+     *
+     * For each supported formats (if applicable), the supported types should be
+     * returned as keys, and each type should be mapped to a boolean indicating
+     * if the result of supportsNormalization() can be cached or not
+     * (a result cannot be cached when it depends on the context or on the data.)
+     * A null value means that the normalizer does not support the corresponding
+     * type.
+     *
+     * Use type "object" to match any classes or interfaces,
+     * and type "*" to match any types.
+     *
+     * @return array<class-string|'*'|'object'|string, bool|null>
+     */
+    public function getSupportedTypes(?string $format): array
+    {
+        return ['*' => true];
+    }
+
+    /**
      * Denormalizes data back into an object of the given class.
      *
      * @param mixed       $data    data to restore
