@@ -4,6 +4,12 @@ All Notable changes to `ViMbAdminClient` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+## 1.2.6 (released 2025-11-29)
+
+### Changed
+-- php minimum is now ^8.0
+-- support for Laravel 11 added, removed 6, 8, 9
+
 ## 1.2.5 (released 2024-08-12)
 
 ### Added
